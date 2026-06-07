@@ -69,6 +69,7 @@ function ensureDatabase() {
             content_md = ?,
             cover_image = ?,
             og_image = ?,
+            author_image = ?,
             content_html = NULL
           WHERE slug = ?`,
         )
@@ -76,6 +77,7 @@ function ensureDatabase() {
           article.contentMd,
           article.coverImage,
           article.ogImage,
+          article.authorImage,
           article.slug,
         );
     }

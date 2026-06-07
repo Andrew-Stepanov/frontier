@@ -48,7 +48,7 @@ export const seedArticles: NewArticle[] = [
     authorName: 'Владимир Корнигор',
     authorRole: 'Основатель Frontier',
     authorImage:
-      '/assets/optim_tildacdn_com/photo_2025-09-29_14-.png_153ccd0cb8b0.webp',
+      '/assets/optim_tildacdn_com/image_20240748.png_612125f6af94.webp',
     coverImage: cover,
     ogImage: og,
     keywords: JSON.stringify([
