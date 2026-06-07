@@ -14,8 +14,6 @@
   --font-body: Roboto, Arial, sans-serif;
 
   --container: 1200px;
-  /* Горизонтальный отступ = левый край логотипа на десктопе (сетка Tilda 1200px) */
-  --page-gutter: max(var(--gutter), calc(50vw - 600px + 200px));
   --content: 800px;
   --content-wide: 960px;
   --gutter: 20px;

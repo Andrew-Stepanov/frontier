@@ -141,18 +141,16 @@ html.canvas-ready [class$='__canvas'] > * {
   position: relative;
   width: 100%;
   background: #000;
-  padding-left: var(--page-gutter);
-  padding-right: var(--page-gutter);
   box-sizing: border-box;
 }
 
 .site-footer--global .site-footer__inner {
   box-sizing: border-box;
-  width: 100%;
-  max-width: none;
-  margin: 0;
+  width: min(100%, var(--container));
+  max-width: var(--container);
+  margin: 0 auto;
   min-height: 94px;
-  padding: 34px 0;
+  padding: 34px var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -197,7 +195,8 @@ html.canvas-ready [class$='__canvas'] > * {
 @media screen and (max-width: 1199px) {
   .site-footer--global .site-footer__inner {
     min-height: 124px;
-    padding: 40px 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
     align-items: flex-start;
   }
 
