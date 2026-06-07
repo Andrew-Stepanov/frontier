@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontier Site (Next.js 16)
 
-## Getting Started
+Полноценный SEO-оптимизированный сайт на **Next.js 16** App Router, собранный из `output/frontier-global-ds` (BEM HTML, CSS, JS, assets).
 
-First, run the development server:
+## Быстрый старт
 
 ```bash
+cd frontier-site
+cp .env.example .env.local   # при необходимости смените URL
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Структура
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Путь | Назначение |
+|------|------------|
+| `content/frontier.json` | Мета и контент для SEO |
+| `content/frontier-body.html` | BEM-разметка страницы (из DS) |
+| `styles/style.css` | Стили из `frontier-global-ds` |
+| `public/js/` | `canvas-scale.js`, `faq.js`, `main.js` |
+| `public/assets/` | Изображения и шрифты |
+| `lib/site.ts` | **Реестр страниц** — sitemap и маршруты |
+| `lib/seo.ts` | Metadata API + JSON-LD |
 
-## Learn More
+## SEO
 
-To learn more about Next.js, take a look at the following resources:
+- `app/sitemap.ts` — автогенерация `/sitemap.xml` из `lib/site.ts`
+- `app/robots.ts` — `/robots.txt` со всеми страницами из реестра
+- `app/manifest.ts` — Web App Manifest
+- На каждой странице: title, description, canonical, Open Graph, Twitter Card, robots, JSON-LD (WebSite, Organization, WebPage, FAQPage)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Новая страница
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Добавьте `content/my-page.json` и `content/my-page-body.html` (через `generate-design-system.js` или вручную).
+2. Зарегистрируйте в `lib/site.ts`:
 
-## Deploy on Vercel
+```ts
+{
+  slug: 'about',
+  contentFile: 'about.json',
+  bodyFile: 'about-body.html',
+  changefreq: 'monthly',
+  priority: 0.8,
+},
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Sitemap, robots и маршрут `/about` подхватятся автоматически.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Обновление контента с pipeline
+
+```bash
+# из корня tilda-mirror
+npm run generate-ds
+cp output/frontier-global-ds/css/style.css frontier-site/styles/
+cp output/frontier-global-ds/js/*.js frontier-site/public/js/
+cp output/frontier-global-ds/content/frontier.json frontier-site/content/
+# пересоздать body HTML:
+node -e "const fs=require('fs');const h=fs.readFileSync('output/frontier-global-ds/index.html','utf8');const m=h.match(/<body[^>]*>([\\s\\S]*?)<script/);fs.writeFileSync('frontier-site/content/frontier-body.html',m[1].trim())"
+```
+
+## Продакшен
+
+```bash
+npm run build
+npm start
+```
+
+Переменная `NEXT_PUBLIC_SITE_URL` должна указывать на боевой домен для корректных canonical и sitemap.
+# frontier
