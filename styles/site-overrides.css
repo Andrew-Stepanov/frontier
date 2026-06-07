@@ -1,0 +1,208 @@
+/* Мобильное меню: затемнение и панель */
+.site-header__backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  z-index: 980;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.site-header__backdrop_visible {
+  display: block;
+  pointer-events: auto;
+}
+
+@media (max-width: 979px) {
+  .site-header {
+    z-index: 1000;
+  }
+
+  .site-header--menu-open {
+    pointer-events: auto;
+  }
+
+  /* Шапка: чёрная подложка всегда (контент не просвечивает при скролле) */
+  .site-header {
+    background: #000;
+  }
+
+  .site-header__inner {
+    position: relative;
+    z-index: 1002;
+    background: #000;
+  }
+
+  /* Оверлей затемняет контент под шапкой */
+  .site-header__backdrop_visible {
+    top: var(--site-header-height, 60px);
+  }
+
+  .site-header__mobile {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    background: #000;
+    padding: calc(var(--site-header-height, 60px) + 16px) 20px 32px;
+    pointer-events: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .site-header__mobile_open {
+    display: block;
+  }
+
+  .site-header__mobile-nav .site-header__nav-link {
+    font-size: 20px;
+    line-height: 1.4;
+    padding: 10px 0;
+    opacity: 1;
+  }
+
+  .site-header__mobile-nav .site-header__button {
+    margin-top: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Бургер → крестик при открытом меню */
+  .site-header__burger[aria-expanded='true'] .site-header__burger-icon {
+    background: transparent;
+  }
+
+  .site-header__burger-icon::before,
+  .site-header__burger-icon::after {
+    transition: top 0.2s ease, transform 0.2s ease;
+  }
+
+  .site-header__burger[aria-expanded='true'] .site-header__burger-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .site-header__burger[aria-expanded='true'] .site-header__burger-icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+}
+
+body.site-header-menu-open {
+  overflow: hidden;
+}
+
+/* Анти-мигание: скрыть canvas-элементы до canvas-scale (после гидрации) */
+html:not(.canvas-ready) [class$='__canvas'] > * {
+  visibility: hidden;
+}
+
+html.canvas-ready [class$='__canvas'] > * {
+  visibility: visible;
+}
+
+/* Bebas Neue: без swap-мигания при preload */
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('/assets/static_tildacdn_com/ofontru_Bebas_Neue_aed20d0a0af2.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+/* Десктоп-шапка: компактнее по высоте */
+@media (min-width: 980px) {
+  .site-header-desktop .site-header-desktop__canvas {
+    height: 70px !important;
+  }
+
+  .site-header-desktop .site-header-desktop__logo {
+    top: 24px !important;
+    font-size: 20px !important;
+  }
+
+  .site-header-desktop .site-header-desktop__cta {
+    top: 21px !important;
+    height: 28px !important;
+    font-size: 13px !important;
+  }
+
+  .site-header-desktop .site-header-desktop__nav-link--benefits,
+  .site-header-desktop .site-header-desktop__nav-link--founders,
+  .site-header-desktop .site-header-desktop__nav-link--pricing {
+    top: 26px !important;
+  }
+}
+
+/* Общий футер (главная, блог, все страницы) */
+.site-footer--global {
+  position: relative;
+  width: 100%;
+  background: #000;
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  box-sizing: border-box;
+}
+
+.site-footer--global .site-footer__inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: 94px;
+  padding: 34px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.site-footer--global .site-footer__copyright {
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+  font-family: var(--font-body);
+  line-height: 1;
+  font-weight: 400;
+}
+
+.site-footer--global .site-footer__links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.site-footer--global .site-footer__link {
+  color: #fff;
+  font-size: 18px;
+  font-family: var(--font-body);
+  line-height: 1;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.site-footer--global .site-footer__link:hover {
+  color: var(--color-accent, #beff3d);
+}
+
+.site-footer--global .site-footer__link--offer {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media screen and (max-width: 1199px) {
+  .site-footer--global .site-footer__inner {
+    min-height: 124px;
+    padding: 40px 0;
+    align-items: flex-start;
+  }
+
+  .site-footer--global .site-footer__copyright,
+  .site-footer--global .site-footer__link {
+    font-size: 12px;
+  }
+}

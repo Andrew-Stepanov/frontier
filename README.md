@@ -1,6 +1,6 @@
 # Frontier Site (Next.js 16)
 
-Полноценный SEO-оптимизированный сайт на **Next.js 16** App Router, собранный из `output/frontier-global-ds` (BEM HTML, CSS, JS, assets).
+SEO-оптимизированный сайт на **Next.js 16** App Router.
 
 ## Быстрый старт
 
@@ -17,12 +17,15 @@ npm run dev
 | Путь | Назначение |
 |------|------------|
 | `content/frontier.json` | Мета и контент для SEO |
-| `content/frontier-body.html` | BEM-разметка страницы (из DS) |
-| `styles/style.css` | Стили из `frontier-global-ds` |
+| `content/frontier-body.html` | BEM-разметка главной страницы |
+| `styles/style.css` | Основные стили страницы |
+| `styles/site-overrides.css` | Доработки Next.js (меню, шапка, анти-мигание) |
 | `public/js/` | `canvas-scale.js`, `faq.js`, `main.js` |
 | `public/assets/` | Изображения и шрифты |
 | `lib/site.ts` | **Реестр страниц** — sitemap и маршруты |
 | `lib/seo.ts` | Metadata API + JSON-LD |
+| `lib/db/` | SQLite (статьи блога), контент в **Markdown** |
+| `app/blog/` | Список статей и страница статьи |
 
 ## SEO
 
@@ -33,7 +36,7 @@ npm run dev
 
 ## Новая страница
 
-1. Добавьте `content/my-page.json` и `content/my-page-body.html` (через `generate-design-system.js` или вручную).
+1. Добавьте `content/my-page.json` и `content/my-page-body.html`.
 2. Зарегистрируйте в `lib/site.ts`:
 
 ```ts
@@ -48,17 +51,13 @@ npm run dev
 
 3. Sitemap, robots и маршрут `/about` подхватятся автоматически.
 
-## Обновление контента с pipeline
+## Блог
 
-```bash
-# из корня tilda-mirror
-npm run generate-ds
-cp output/frontier-global-ds/css/style.css frontier-site/styles/
-cp output/frontier-global-ds/js/*.js frontier-site/public/js/
-cp output/frontier-global-ds/content/frontier.json frontier-site/content/
-# пересоздать body HTML:
-node -e "const fs=require('fs');const h=fs.readFileSync('output/frontier-global-ds/index.html','utf8');const m=h.match(/<body[^>]*>([\\s\\S]*?)<script/);fs.writeFileSync('frontier-site/content/frontier-body.html',m[1].trim())"
-```
+- `/blog` — список статей из SQLite (`data/blog.sqlite`)
+- `/blog/[slug]` — статья (Markdown), оглавление, CTA «Вступить в клуб», SEO
+- При первом запуске БД создаётся автоматически с демо-статьёй
+
+Статьи добавляются в таблицу `articles` (см. `lib/db/schema.ts`). Позже можно подключить Postgres без смены схемы Drizzle.
 
 ## Продакшен
 
@@ -68,4 +67,3 @@ npm start
 ```
 
 Переменная `NEXT_PUBLIC_SITE_URL` должна указывать на боевой домен для корректных canonical и sitemap.
-# frontier

@@ -1,0 +1,33 @@
+/**
+ * Design tokens Frontier — единые для лендинга и блога.
+ * Размеры согласованы с style.css (hero, benefits, market).
+ */
+:root {
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-text-muted: rgba(255, 255, 255, 0.72);
+  --color-text-soft: rgba(255, 255, 255, 0.55);
+  --color-accent: #beff3d;
+  --color-border: rgba(255, 255, 255, 0.12);
+
+  --font-display: 'Bebas Neue', Arial, sans-serif;
+  --font-body: Roboto, Arial, sans-serif;
+
+  --container: 1200px;
+  /* Горизонтальный отступ = левый край логотипа на десктопе (сетка Tilda 1200px) */
+  --page-gutter: max(var(--gutter), calc(50vw - 600px + 200px));
+  --content: 800px;
+  --content-wide: 960px;
+  --gutter: 20px;
+
+  --text-display: clamp(40px, 7vw, 74px);
+  --text-h1: clamp(40px, 5.5vw, 48px);
+  --text-h2: clamp(28px, 4vw, 36px);
+  --text-h3: clamp(20px, 3vw, 22px);
+  --text-body: clamp(14px, 2.5vw, 20px);
+  --text-body-lg: clamp(16px, 2.8vw, 22px);
+  --text-small: clamp(12px, 2vw, 14px);
+
+  --line-tight: 1.1;
+  --line-body: 1.55;
+}
