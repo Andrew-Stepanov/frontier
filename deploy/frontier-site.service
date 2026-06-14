@@ -1,0 +1,14 @@
+[Unit]
+Description=Frontier Site (Next.js)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/tilda/frontier-site
+EnvironmentFile=/root/tilda/frontier-site/.env.local
+ExecStart=/usr/local/bin/npm run start:prod --silent
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

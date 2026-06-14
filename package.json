@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
+    "start:prod": "next start -H 127.0.0.1 -p 3010",
     "lint": "eslint",
     "mcp:blog": "tsx mcp/blog-server/index.ts",
     "mcp:blog:http": "tsx mcp/blog-server/http.ts"

@@ -46,7 +46,16 @@ NEXT_PUBLIC_SITE_URL=https://frontier-global.club
 
 Стандартный Next.js: `npm run build && npm start` или Vercel.
 
-Убедиться, что `NEXT_PUBLIC_SITE_URL` задан на хостинге.
+Убедиться, что `NEXT_PUBLIC_SITE_URL` задан на хостинге **до** `npm run build` (вшивается в HTML).
+
+### Временный доступ по IP (этот сервер)
+
+- URL: `http://95.181.162.126`
+- Next.js: `127.0.0.1:3010` (`npm run start:prod`)
+- systemd: `frontier-site.service` (шаблон в `deploy/`)
+- nginx: `deploy/nginx-frontier-ip.conf` → default на `:80`
+
+После подключения домена: обновить `NEXT_PUBLIC_SITE_URL`, `npm run build`, nginx vhost с SSL.
 
 ## Troubleshooting
 
