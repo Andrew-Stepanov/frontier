@@ -1,0 +1,23 @@
+---
+description: Wiki-first workflow и CHANGES.md для frontier-site
+alwaysApply: true
+---
+
+# frontier-site — workflow агента
+
+Полные правила: [AGENTS.md](AGENTS.md).
+
+## Перед существенной работой
+
+1. Прочитай [.wiki/index.md](.wiki/index.md) и релевантные страницы `.wiki/`.
+2. Не сканируй весь репозиторий, если ответ уже в wiki.
+
+## После правок
+
+1. Допиши запись в конец [CHANGES.md](CHANGES.md) (шаблон в файле).
+2. Обнови `.wiki/`, если изменилась архитектура или процессы.
+3. Не отвечай «готово» без записи в CHANGES.md при изменениях в `app/`, `components/`, `lib/`, `styles/`, `content/`, `public/`.
+
+## Исключения
+
+Чтение без правок; правки только в CHANGES.md или только в `.wiki/`.

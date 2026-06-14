@@ -8,7 +8,3 @@ export async function loadPageContent(contentFile: string): Promise<PageContent>
   const raw = await readFile(path.join(contentDir, contentFile), 'utf-8');
   return JSON.parse(raw) as PageContent;
 }
-
-export async function loadPageBody(bodyFile: string): Promise<string> {
-  return readFile(path.join(contentDir, bodyFile), 'utf-8');
-}

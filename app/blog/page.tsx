@@ -1,26 +1,13 @@
-import type { Metadata } from 'next';
 import { ArticleCard } from '@/components/blog/ArticleCard';
 import { Breadcrumbs } from '@/components/blog/Breadcrumbs';
 import { JsonLd } from '@/components/JsonLd';
 import { getPublishedArticles } from '@/lib/blog';
-import { buildBlogListJsonLd } from '@/lib/seo-article';
-import { siteConfig } from '@/lib/site';
+import {
+  buildBlogListJsonLd,
+  buildBlogListMetadata,
+} from '@/lib/seo-article';
 
-export const metadata: Metadata = {
-  title: 'Блог',
-  description:
-    'Статьи Frontier о выходе на глобальные рынки, масштабировании бизнеса и опыте фаундеров.',
-  alternates: {
-    canonical: new URL('/blog', siteConfig.url).toString(),
-  },
-  openGraph: {
-    type: 'website',
-    title: `Блог | ${siteConfig.name}`,
-    description:
-      'Статьи о выходе на глобальные рынки, масштабировании и опыте фаундеров.',
-    url: new URL('/blog', siteConfig.url).toString(),
-  },
-};
+export const metadata = buildBlogListMetadata();
 
 export default function BlogPage() {
   const articles = getPublishedArticles();

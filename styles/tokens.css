@@ -1,6 +1,6 @@
 /**
- * Design tokens Frontier — единые для лендинга и блога.
- * Размеры согласованы с style.css (hero, benefits, market).
+ * Design tokens Frontier — лендинг и блог.
+ * Эталон: output/frontier-global (artboard 1200px, контент 800px).
  */
 :root {
   --color-bg: #000000;
@@ -8,24 +8,44 @@
   --color-text-muted: rgba(255, 255, 255, 0.72);
   --color-text-soft: rgba(255, 255, 255, 0.55);
   --color-accent: #beff3d;
+  --color-accent-soft: #cafb3e;
+  --color-accent-plus: #b4f247;
+  --color-surface: #212121;
   --color-border: rgba(255, 255, 255, 0.12);
 
   --font-display: 'Bebas Neue', Arial, sans-serif;
   --font-body: Roboto, Arial, sans-serif;
 
+  --artboard: 1200px;
   --container: 1200px;
   --content: 800px;
-  --content-wide: 960px;
   --gutter: 20px;
+  --header-h: 87px;
 
-  --text-display: clamp(40px, 7vw, 74px);
-  --text-h1: clamp(40px, 5.5vw, 48px);
-  --text-h2: clamp(28px, 4vw, 36px);
-  --text-h3: clamp(20px, 3vw, 22px);
-  --text-body: clamp(14px, 2.5vw, 20px);
-  --text-body-lg: clamp(16px, 2.8vw, 22px);
-  --text-small: clamp(12px, 2vw, 14px);
+  --line-tight: 1;
+  --line-body: 1.4;
 
-  --line-tight: 1.1;
-  --line-body: 1.55;
+  --text-h1: clamp(40px, 5vw, 60px);
+  --text-h2: clamp(32px, 4vw, 44px);
+  --text-h3: clamp(22px, 2.5vw, 28px);
+  --text-body-lg: clamp(18px, 2vw, 22px);
+  --text-body: 16px;
+  --text-small: 14px;
+}
+
+@media (max-width: 1199px) {
+  :root {
+    --header-h: 77px;
+  }
+}
+
+html {
+  scroll-padding-top: var(--header-h);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
 }

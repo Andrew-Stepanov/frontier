@@ -9,6 +9,8 @@ import { MarkdownContent } from '@/components/blog/MarkdownContent';
 import { ShareButtons } from '@/components/blog/ShareButtons';
 import { JsonLd } from '@/components/JsonLd';
 import { getAllArticleSlugs, getArticleBySlug } from '@/lib/blog';
+import { FALLBACK_COVER } from '@/lib/constants';
+import { formatDate } from '@/lib/format';
 import { extractToc, getArticleMarkdown } from '@/lib/markdown';
 import {
   buildArticleJsonLd,
@@ -35,14 +37,6 @@ export async function generateMetadata({
   return buildArticleMetadata(article);
 }
 
-function formatDate(iso: string): string {
-  return new Intl.DateTimeFormat('ru-RU', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  }).format(new Date(iso));
-}
-
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
@@ -55,7 +49,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const cover =
     article.coverImage ||
     article.ogImage ||
-    'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&q=80';
+    FALLBACK_COVER;
 
   return (
     <main className="blog-page">
@@ -83,7 +77,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <figure className="blog-article__cover">
           <Image
             src={cover}
-            alt=""
+            alt={article.title}
             width={1200}
             height={675}
             priority

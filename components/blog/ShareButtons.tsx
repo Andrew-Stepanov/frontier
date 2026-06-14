@@ -43,7 +43,8 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
       await navigator.clipboard.writeText(url);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
-    } catch {
+    } catch (e) {
+      console.warn('copyLink: clipboard write failed', e);
       setCopied(false);
     }
   }, [url]);

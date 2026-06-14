@@ -11,7 +11,7 @@ export function buildPageMetadata(
   content: PageContent,
   pagePath: string,
 ): Metadata {
-  const canonical = content.meta.canonical || absoluteUrl(pagePath);
+  const canonical = absoluteUrl(pagePath);
   const ogImage = content.meta.ogImage || siteConfig.defaultOgImage;
   const ogImageUrl = absoluteUrl(ogImage);
 

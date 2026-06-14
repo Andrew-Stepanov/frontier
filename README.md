@@ -2,6 +2,14 @@
 
 SEO-оптимизированный сайт на **Next.js 16** App Router.
 
+## Документация
+
+| Ресурс | Описание |
+|--------|----------|
+| [.wiki/index.md](.wiki/index.md) | Wiki проекта (архитектура, лендинг, блог, стили) |
+| [CHANGES.md](CHANGES.md) | Журнал изменений (append-only) |
+| [AGENTS.md](AGENTS.md) | Инструкции для AI: Cursor, Claude Code, Codex |
+
 ## Быстрый старт
 
 ```bash
@@ -17,12 +25,11 @@ npm run dev
 | Путь | Назначение |
 |------|------------|
 | `content/frontier.json` | Мета и контент для SEO |
-| `content/frontier-body.html` | BEM-разметка главной страницы |
-| `styles/style.css` | Основные стили страницы |
-| `styles/site-overrides.css` | Доработки Next.js (меню, шапка, анти-мигание) |
-| `public/js/` | `canvas-scale.js`, `faq.js`, `main.js` |
+| `components/landing/` | React-секции главной (1:1 с эталоном) |
+| `styles/landing.css` | Стили лендинга (поток + absolute canvas для market) |
+| `styles/site-overrides.css` | Шапка блога, футер, мобильное меню |
 | `public/assets/` | Изображения и шрифты |
-| `lib/site.ts` | **Реестр страниц** — sitemap и маршруты |
+| `lib/site.ts` | **Реестр страниц** — sitemap |
 | `lib/seo.ts` | Metadata API + JSON-LD |
 | `lib/db/` | SQLite (статьи блога), контент в **Markdown** |
 | `app/blog/` | Список статей и страница статьи |
@@ -36,14 +43,13 @@ npm run dev
 
 ## Новая страница
 
-1. Добавьте `content/my-page.json` и `content/my-page-body.html`.
-2. Зарегистрируйте в `lib/site.ts`:
+1. Добавьте React-компонент в `app/` или `components/`.
+2. Зарегистрируйте в `lib/site.ts` для sitemap:
 
 ```ts
 {
   slug: 'about',
   contentFile: 'about.json',
-  bodyFile: 'about-body.html',
   changefreq: 'monthly',
   priority: 0.8,
 },

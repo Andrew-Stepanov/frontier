@@ -23,12 +23,11 @@ export type ChangeFrequency =
   | 'yearly'
   | 'never';
 
-/** Реестр страниц: добавьте запись — sitemap и маршруты подхватят автоматически */
+/** Реестр страниц: добавьте запись — sitemap подхватит автоматически */
 export interface PageDefinition {
   /** Пустая строка = главная (`/`) */
   slug: string;
   contentFile: string;
-  bodyFile: string;
   changefreq: ChangeFrequency;
   priority: number;
 }
@@ -37,7 +36,6 @@ export const pages: PageDefinition[] = [
   {
     slug: '',
     contentFile: 'frontier.json',
-    bodyFile: 'frontier-body.html',
     changefreq: 'weekly',
     priority: 1,
   },
@@ -54,14 +52,6 @@ export const extraRoutes: Array<{
 
 export function getPagePath(slug: string): string {
   return slug === '' ? '/' : `/${slug}`;
-}
-
-export function getAllSlugs(): string[] {
-  return pages.filter((p) => p.slug !== '').map((p) => p.slug);
-}
-
-export function getPageBySlug(slug: string): PageDefinition | undefined {
-  return pages.find((p) => p.slug === slug);
 }
 
 export function getHomePage(): PageDefinition {

@@ -29,7 +29,8 @@ export function parseKeywords(raw: string | null): string[] {
   try {
     const parsed = JSON.parse(raw) as unknown;
     return Array.isArray(parsed) ? parsed.filter((k) => typeof k === 'string') : [];
-  } catch {
+  } catch (e) {
+    console.warn('parseKeywords: failed to parse', raw, e);
     return [];
   }
 }

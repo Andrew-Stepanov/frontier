@@ -1,4 +1,122 @@
-/* Мобильное меню: затемнение и панель */
+/* ============================================================
+   Site header — единый для всех страниц (landing + blog)
+   ============================================================ */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #000;
+  border-bottom: none;
+}
+
+.site-header__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  max-width: none;
+  height: var(--header-h);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  box-sizing: border-box;
+}
+
+@media (min-width: 1200px) {
+  .site-header__inner {
+    padding-left: calc(200 * 100vw / 1200);
+    padding-right: calc(200 * 100vw / 1200);
+  }
+}
+
+.site-header__logo {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #fff;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.site-header__logo:hover {
+  color: #c0c0c0;
+}
+
+.site-header__nav {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.site-header__nav-link {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.site-header__nav-link:hover {
+  color: #c0c0c0;
+}
+
+.site-header__actions {
+  position: relative;
+  z-index: 2;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.site-header__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 33px;
+  padding: 0 20px;
+  border-radius: 30px;
+  background: var(--color-accent);
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: filter 0.15s;
+}
+
+.site-header__button:hover {
+  filter: brightness(1.08);
+}
+
+/* Burger: hidden on desktop */
+.site-header__burger {
+  display: none;
+}
+
+/* Mobile panel: hidden by default */
+.site-header__mobile {
+  display: none;
+}
+
+/* Backdrop */
 .site-header__backdrop {
   display: none;
   position: fixed;
@@ -15,68 +133,53 @@
   pointer-events: auto;
 }
 
+/* ---- Mobile breakpoint ---- */
 @media (max-width: 979px) {
-  .site-header {
-    z-index: 1000;
-  }
-
-  .site-header--menu-open {
-    pointer-events: auto;
-  }
-
-  /* Шапка: чёрная подложка всегда (контент не просвечивает при скролле) */
-  .site-header {
-    background: #000;
-  }
-
-  .site-header__inner {
-    position: relative;
-    z-index: 1002;
-    background: #000;
-  }
-
-  /* Оверлей затемняет контент под шапкой */
-  .site-header__backdrop_visible {
-    top: var(--site-header-height, 60px);
-  }
-
-  .site-header__mobile {
+  .site-header__nav {
     display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1001;
-    background: #000;
-    padding: calc(var(--site-header-height, 60px) + 16px) 20px 32px;
-    pointer-events: auto;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
   }
 
-  .site-header__mobile_open {
-    display: block;
-  }
-
-  .site-header__mobile-nav .site-header__nav-link {
-    font-size: 20px;
-    line-height: 1.4;
-    padding: 10px 0;
-    opacity: 1;
-  }
-
-  .site-header__mobile-nav .site-header__button {
-    margin-top: 12px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  /* Бургер → крестик при открытом меню */
-  .site-header__burger[aria-expanded='true'] .site-header__burger-icon {
+  .site-header__burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
     background: transparent;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 8px;
+    flex-shrink: 0;
+  }
+
+  .site-header__burger-icon {
+    display: block;
+    position: relative;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: background 0.2s;
   }
 
   .site-header__burger-icon::before,
   .site-header__burger-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
     transition: top 0.2s ease, transform 0.2s ease;
+  }
+
+  .site-header__burger-icon::before { top: -7px; }
+  .site-header__burger-icon::after  { top:  7px; }
+
+  .site-header__burger[aria-expanded='true'] .site-header__burger-icon {
+    background: transparent;
   }
 
   .site-header__burger[aria-expanded='true'] .site-header__burger-icon::before {
@@ -88,22 +191,68 @@
     top: 0;
     transform: rotate(-45deg);
   }
+
+  .site-header--menu-open {
+    pointer-events: auto;
+  }
+
+  .site-header--menu-open .site-header__inner {
+    position: relative;
+    z-index: 1003;
+    background: #000;
+  }
+
+  .site-header__backdrop_visible {
+    top: var(--site-header-height, var(--header-h));
+  }
+
+  .site-header__mobile {
+    display: none;
+    position: fixed;
+    top: var(--site-header-height, var(--header-h));
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    background: #000;
+    padding: 16px 20px 32px;
+    pointer-events: auto;
+    overflow-y: auto;
+    max-height: calc(100dvh - var(--site-header-height, var(--header-h)));
+    -webkit-overflow-scrolling: touch;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .site-header__mobile_open {
+    display: block;
+  }
+
+  .site-header__mobile-nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .site-header__mobile-nav .site-header__nav-link {
+    font-size: 20px;
+    line-height: 1.4;
+    padding: 10px 0;
+    opacity: 1;
+    display: block;
+  }
+
+  .site-header__mobile-nav .site-header__button {
+    margin-top: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 44px;
+    font-size: 15px;
+  }
 }
 
 body.site-header-menu-open {
   overflow: hidden;
 }
 
-/* Анти-мигание: скрыть canvas-элементы до canvas-scale (после гидрации) */
-html:not(.canvas-ready) [class$='__canvas'] > * {
-  visibility: hidden;
-}
-
-html.canvas-ready [class$='__canvas'] > * {
-  visibility: visible;
-}
-
-/* Bebas Neue: без swap-мигания при preload */
+/* Bebas Neue: block display to avoid swap flash */
 @font-face {
   font-family: 'Bebas Neue';
   src: url('/assets/static_tildacdn_com/ofontru_Bebas_Neue_aed20d0a0af2.woff') format('woff');
@@ -112,31 +261,10 @@ html.canvas-ready [class$='__canvas'] > * {
   font-display: block;
 }
 
-/* Десктоп-шапка: компактнее по высоте */
-@media (min-width: 980px) {
-  .site-header-desktop .site-header-desktop__canvas {
-    height: 70px !important;
-  }
+/* ============================================================
+   Global footer
+   ============================================================ */
 
-  .site-header-desktop .site-header-desktop__logo {
-    top: 24px !important;
-    font-size: 20px !important;
-  }
-
-  .site-header-desktop .site-header-desktop__cta {
-    top: 21px !important;
-    height: 28px !important;
-    font-size: 13px !important;
-  }
-
-  .site-header-desktop .site-header-desktop__nav-link--benefits,
-  .site-header-desktop .site-header-desktop__nav-link--founders,
-  .site-header-desktop .site-header-desktop__nav-link--pricing {
-    top: 26px !important;
-  }
-}
-
-/* Общий футер (главная, блог, все страницы) */
 .site-footer--global {
   position: relative;
   width: 100%;
@@ -146,8 +274,8 @@ html.canvas-ready [class$='__canvas'] > * {
 
 .site-footer--global .site-footer__inner {
   box-sizing: border-box;
-  width: min(100%, var(--container));
-  max-width: var(--container);
+  width: 100%;
+  max-width: none;
   margin: 0 auto;
   min-height: 94px;
   padding: 34px var(--gutter);
@@ -156,6 +284,13 @@ html.canvas-ready [class$='__canvas'] > * {
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
+}
+
+@media (min-width: 1200px) {
+  .site-footer--global .site-footer__inner {
+    padding-left: calc(200 * 100vw / 1200);
+    padding-right: calc(200 * 100vw / 1200);
+  }
 }
 
 .site-footer--global .site-footer__copyright {

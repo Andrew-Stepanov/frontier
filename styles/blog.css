@@ -1,21 +1,29 @@
-/* Блог — в единой стилистике Frontier (tokens.css + style.css) */
+/* Блог — в единой стилистике Frontier (tokens.css) */
 
 .blog-page {
   min-height: 100vh;
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
-  padding: 88px 0 48px;
+  padding: var(--header-h) 0 48px;
   box-sizing: border-box;
 }
 
 .blog-page__container {
-  width: min(100%, var(--container));
-  max-width: var(--container);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--content);
   margin: 0 auto;
   padding-left: var(--gutter);
   padding-right: var(--gutter);
-  box-sizing: border-box;
+}
+
+@media (min-width: 1200px) {
+  .blog-page__container {
+    max-width: none;
+    padding-left: max(var(--gutter), calc((100vw - var(--content)) / 2));
+    padding-right: max(var(--gutter), calc((100vw - var(--content)) / 2));
+  }
 }
 
 /* Хлебные крошки — всегда сверху, слева */

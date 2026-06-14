@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import { Roboto } from 'next/font/google';
+import { MobileMenuEnhancer } from '@/components/MobileMenuEnhancer';
 import { SiteFooter } from '@/components/SiteFooter';
+import { SiteHeader } from '@/components/SiteHeader';
 import { siteConfig } from '@/lib/site';
 import '../styles/tokens.css';
-import '../styles/style.css';
 import '../styles/site-overrides.css';
 
 const BEBAS_WOFF =
@@ -56,6 +57,8 @@ export default function RootLayout({
         />
       </head>
       <body className={`page ${roboto.className} ${roboto.variable}`}>
+        <SiteHeader />
+        <MobileMenuEnhancer />
         {children}
         <SiteFooter />
       </body>
