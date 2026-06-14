@@ -17,10 +17,10 @@ Layout блога: `app/blog/layout.tsx` — только импорт `blog.css
 
 ## Добавление статьи
 
-1. INSERT в `articles` (или расширить seed / будущий CMS).
-2. Контент — **Markdown** в `content_md`.
-3. Slug уникальный; URL `/blog/{slug}`.
-4. После добавления — `npm run build` для SSG.
+1. **MCP** (рекомендуется): `npm run mcp:blog`, см. [mcp-blog.md](mcp-blog.md).
+2. Или INSERT в `articles` вручную / через seed.
+3. Slug уникальный; контент — **Markdown** в `content_md`.
+4. После добавления — `npm run build` для SSG на проде.
 
 ## Компоненты (`components/blog/`)
 

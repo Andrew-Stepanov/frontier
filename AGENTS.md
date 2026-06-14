@@ -32,6 +32,7 @@ Next.js 16 (App Router, Turbopack), React 19, TypeScript, SQLite + Drizzle (бл
 | `styles/blog.css` | Стили блога |
 | `lib/site.ts` | Реестр страниц, `siteConfig` |
 | `lib/db/` | SQLite, схема статей |
+| `mcp/blog-server/` | MCP: защищённое добавление статей |
 | `content/frontier.json` | SEO-мета главной |
 | `public/assets/` | Изображения и шрифты с Tilda |
 

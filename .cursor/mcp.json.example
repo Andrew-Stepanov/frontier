@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "frontier-blog": {
+      "command": "npm",
+      "args": ["run", "mcp:blog", "--silent"],
+      "cwd": "/absolute/path/to/frontier-site",
+      "env": {
+        "FRONTIER_MCP_TOKEN": "замените-на-секрет-min-24-символов",
+        "NEXT_PUBLIC_SITE_URL": "https://frontier-global.club"
+      }
+    }
+  }
+}

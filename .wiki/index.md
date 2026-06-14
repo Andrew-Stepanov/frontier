@@ -9,6 +9,7 @@
 | [architecture.md](architecture.md) | Структура app, layout, маршруты |
 | [landing.md](landing.md) | Главная: секции, ScaledCanvas, координаты |
 | [blog.md](blog.md) | Блог, SQLite, Markdown, компоненты |
+| [mcp-blog.md](mcp-blog.md) | MCP: защищённое добавление статей |
 | [styling.md](styling.md) | CSS, tokens, брейкпоинты, шапка |
 | [seo-and-content.md](seo-and-content.md) | SEO, JSON-LD, content JSON |
 | [seo-audit.md](seo-audit.md) | Чеклист SEO и статус |
